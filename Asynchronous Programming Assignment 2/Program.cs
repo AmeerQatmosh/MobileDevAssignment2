@@ -17,9 +17,10 @@ namespace Asynchronous_Programming_Assignment_2
             Console.WriteLine(routes.Count.ToString());
             Route bestRoute = new Calculations(routes).syncCalculation();
             Console.WriteLine("Shortest path is: \n");
-            bestRoute.printRouters();
+            // bestRoute.printRouters();
             Thread T = new Thread (new ThreadStart(bestRoute.printRouters));
             T.Start();
+
 
         }
 
@@ -195,7 +196,7 @@ namespace Asynchronous_Programming_Assignment_2
                 }
             }
 
-            public void asyncCalculation()
+            public async static void asyncCalculation()
             {
 
             }
