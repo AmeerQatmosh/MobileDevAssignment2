@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Collections; 
 namespace Asynchronous_Programming_Assignment_2
 {
@@ -15,8 +16,10 @@ namespace Asynchronous_Programming_Assignment_2
             List<Route>  routes = userInput.getRoutes();
             Console.WriteLine(routes.Count.ToString());
             Route bestRoute = new Calculations(routes).syncCalculation();
-            Console.WriteLine("Shortest path is ");
+            Console.WriteLine("Shortest path is: \n");
             bestRoute.printRouters();
+            Thread T = new Thread (new ThreadStart(bestRoute.printRouters));
+            T.Start();
 
         }
 
@@ -57,7 +60,7 @@ namespace Asynchronous_Programming_Assignment_2
            
             public void printRouters()
             {
-                Console.WriteLine("Route time = " + getPathTime().ToString());
+                Console.WriteLine("\nRoute time = " + getPathTime().ToString());
                 foreach(Router router in routers)
                 {
                     Console.Write(router.getTime().ToString() + ",");                    
@@ -82,7 +85,7 @@ namespace Asynchronous_Programming_Assignment_2
                 Console.WriteLine("               ========================================================================");
                 Console.WriteLine("               | 1. Create a new route                                                |");
                 Console.WriteLine("               | 2. Add a router to given route                                       |");
-                Console.WriteLine("               | 3. Show Routes.                                                      |");
+                Console.WriteLine("               | 3. Find shortest path using Sync method.                             |");
                 Console.WriteLine("               ========================================================================");
                 Console.WriteLine("\n");
                 Console.WriteLine("Enter your choice: ");
@@ -99,7 +102,7 @@ namespace Asynchronous_Programming_Assignment_2
                     {
 
                         case 1:
-                            Console.WriteLine("Please enter the routers of the route");
+                            Console.WriteLine("Please Enter the routers of the route");
                             getRoutesValues();
                             break;
 
@@ -136,10 +139,10 @@ namespace Asynchronous_Programming_Assignment_2
 
             public void addRouterToSpecificRoute()
             {
-                Console.WriteLine("Please enter the Route id: ");
+                Console.WriteLine("Please enter the Route id: \n");
                 int id = Convert.ToInt32(Console.ReadLine());
 
-                Console.WriteLine("Please enter the value of router ");
+                Console.WriteLine("Please enter the value of router: \n");
                 int routerTime = Convert.ToInt32(Console.ReadLine());
                 
                     Route item = routeArr.FirstOrDefault(o => o.id == id);
@@ -150,8 +153,7 @@ namespace Asynchronous_Programming_Assignment_2
                 }
 
             }
-            //a.Create a new route
-            //b.Add a router to given route
+            
         }
 
         class Calculations
@@ -175,6 +177,8 @@ namespace Asynchronous_Programming_Assignment_2
                     bestRoute = routeArr[0];
                     foreach (Route route in routeArr)
                     {
+                        Thread.Sleep(100);
+
                         var routePathTime = route.getPathTime();
                         if (routePathTime < min)
                         {
