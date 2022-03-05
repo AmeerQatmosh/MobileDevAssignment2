@@ -13,13 +13,14 @@ namespace Asynchronous_Programming_Assignment_2
         {
             Console.WriteLine("                        Asynchronous Programming Concole Application\n");
             UserInput userInput = new UserInput();
-            List<Route>  routes = userInput.getRoutes();
+            List<Route> routes = userInput.getRoutes();
             Console.WriteLine(routes.Count.ToString());
             Route bestRoute = new Calculations(routes).syncCalculation();
             Console.WriteLine("Shortest path is: \n");
             // bestRoute.printRouters();
-            Thread T = new Thread (new ThreadStart(bestRoute.printRouters));
+            Thread T = new Thread(new ThreadStart(bestRoute.printRouters));
             T.Start();
+
 
 
         }
@@ -45,35 +46,35 @@ namespace Asynchronous_Programming_Assignment_2
             public List<Router> routers = new List<Router>();
             public Route(int id, List<Router> routers)
             {
-                this.id = id; 
+                this.id = id;
                 this.routers = routers;
             }
 
-            public int getPathTime(){
+            public int getPathTime() {
                 int sum = 0;
-                foreach(Router router in routers)
+                foreach (Router router in routers)
                 {
                     sum += router.getTime();
                 }
                 return sum;
             }
 
-           
+
             public void printRouters()
             {
                 Console.WriteLine("\nRoute time = " + getPathTime().ToString());
-                foreach(Router router in routers)
+                foreach (Router router in routers)
                 {
-                    Console.Write(router.getTime().ToString() + ",");                    
+                    Console.Write(router.getTime().ToString() + ",");
                 }
-               
+
             }
         }
 
 
         class UserInput
         {
-         
+
             public List<Route> routeArr = new List<Route>();
             public List<Router> routersArr;
 
@@ -110,9 +111,10 @@ namespace Asynchronous_Programming_Assignment_2
                         case 2:
                             addRouterToSpecificRoute();
                             break;
-           
+
                         case 3:
                             return routeArr;
+                     
 
                         default:
                             Console.WriteLine("*Unknown choice, Please try again! ");
@@ -124,18 +126,18 @@ namespace Asynchronous_Programming_Assignment_2
 
             void getRoutesValues()
             {
-                    Array arr = Array.ConvertAll(Console.ReadLine().Trim().Split(' '), Convert.ToInt32);
+                Array arr = Array.ConvertAll(Console.ReadLine().Trim().Split(' '), Convert.ToInt32);
                 routersArr = new List<Router>();
                 foreach (int item in arr)
-                    {
-                        var router = new Router(item);
-                        routersArr.Add(router);
-           
-                    }
+                {
+                    var router = new Router(item);
+                    routersArr.Add(router);
+
+                }
                 Route route = new Route(routeArr.Count, routersArr);
                 Console.WriteLine("new route created with id = " + route.id);
                 routeArr.Add(route);
-                
+
             }
 
             public void addRouterToSpecificRoute()
@@ -145,8 +147,8 @@ namespace Asynchronous_Programming_Assignment_2
 
                 Console.WriteLine("Please enter the value of router: \n");
                 int routerTime = Convert.ToInt32(Console.ReadLine());
-                
-                    Route item = routeArr.FirstOrDefault(o => o.id == id);
+
+                Route item = routeArr.FirstOrDefault(o => o.id == id);
                 if (item != null)
                 {
                     item.routers.Add(new Router(routerTime));
@@ -154,7 +156,7 @@ namespace Asynchronous_Programming_Assignment_2
                 }
 
             }
-            
+
         }
 
         class Calculations
@@ -196,12 +198,19 @@ namespace Asynchronous_Programming_Assignment_2
                 }
             }
 
-            public async static void asyncCalculation()
-            {
+            /* public async static void asyncCalculation()
+             {
+                 var routes = new List<Route>()
+                 {
+                    // await Task.Delay(1000);
+                 }
 
-            }
+
+             }
+         }
+            */
 
 
         }
     }
-}
+    }
