@@ -10,7 +10,7 @@ namespace Asynchronous_Programming_Assignment_2
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Asynchronous Programming Concole Application");
+            Console.WriteLine("                        Asynchronous Programming Concole Application\n");
             UserInput userInput = new UserInput();
             List<Route>  routes = userInput.getRoutes();
             Console.WriteLine(routes.Count.ToString());
@@ -19,8 +19,6 @@ namespace Asynchronous_Programming_Assignment_2
             bestRoute.printRouters();
 
         }
-
-        
 
         public class Router
         {
@@ -83,11 +81,11 @@ namespace Asynchronous_Programming_Assignment_2
                 Console.WriteLine("               | To perform the following operations, choose the operation number.    |");
                 Console.WriteLine("               ========================================================================");
                 Console.WriteLine("               | 1. Create a new route                                                |");
-                Console.WriteLine("               | 2. Add a router to given route                                        |");
-                Console.WriteLine("               ========================================================================");
-                Console.WriteLine("               | 3. Exit.                                                             |");
+                Console.WriteLine("               | 2. Add a router to given route                                       |");
+                Console.WriteLine("               | 3. Show Routes.                                                      |");
                 Console.WriteLine("               ========================================================================");
                 Console.WriteLine("\n");
+                Console.WriteLine("Enter your choice: ");
 
             }
 
